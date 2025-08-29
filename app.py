@@ -55,11 +55,13 @@ init_db_pragmas()
 @app.route('/', methods=['GET'])
 def health_check():
     """Health check endpoint for Railway"""
+    print(f"Health check accessed at {datetime.now()}")
     return jsonify({
         'status': 'healthy',
         'service': 'LifeTrack Backend',
         'version': '1.0.0',
-        'timestamp': datetime.now().isoformat()
+        'timestamp': datetime.now().isoformat(),
+        'port': os.environ.get('PORT', 'unknown')
     })
 
 def execute_write(fn, retries=5, base_delay=0.15):
@@ -394,4 +396,6 @@ def delete_doctor(doctor_id):
 if __name__ == '__main__':
     import os
     port = int(os.environ.get('PORT', 5000))
+    print(f"Starting Flask app on port {port}")
+    print(f"Environment PORT: {os.environ.get('PORT', 'not set')}")
     app.run(host='0.0.0.0', port=port, debug=False)
