@@ -251,7 +251,7 @@ def add_doctor():
                 doctor_id = cursor.lastrowid
                 
                 # Add to doctor analytics
-                doctor = Doctor(a
+                doctor = Doctor(
                     doctor_id=doctor_id,
                     name=data['name'],
                     specialization=data.get('specialization', ''),
